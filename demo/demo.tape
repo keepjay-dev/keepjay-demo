@@ -12,13 +12,14 @@ Require cargo
 Set Shell "bash"
 Set FontSize 20
 Set Width 1400
-Set Height 820
+Set Height 660
 Set Padding 24
 Set TypingSpeed 40ms
 Set Theme "Catppuccin Mocha"
 
-# Off camera: a throwaway data folder, no usage ping, a clean build so `cargo test` takes
-# long enough to review during, and a plain prompt.
+# Off camera: a throwaway data folder, no usage ping, a clean build, and a plain prompt.
+# `cargo test` then takes about 20 seconds: the build, and tests/flaky_server.rs, which
+# really waits between retries.
 Hide
 Type "export KEEPJAY_DATA_DIR=$(mktemp -d) KEEPJAY_NO_TELEMETRY=1 PS1='\[\e[1;34m\]demo\[\e[0m\] $ '" Enter
 Type "kj init -w Demo > /dev/null && cargo clean -q && cargo fetch -q && clear" Enter

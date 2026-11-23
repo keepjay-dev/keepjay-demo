@@ -23,7 +23,7 @@ Use a large font (about 20 pt) and a terminal about 110 columns wide.
 
 **Tips**
 
-- Do a dry run first: `cargo test` should take about 15–20 seconds from clean. If it's
-  faster on your machine, review a single card.
+- Do a dry run first: `cargo test` takes about 20–30 seconds from clean (the build, plus
+  `tests/flaky_server.rs`, which really waits between retries for about 13 seconds).
 - On macOS, the `sed` edit is `sed -i '' 's/pow(attempt)/pow(attempt + 1)/' src/backoff.rs`.
 - Afterwards, `git checkout .` puts the files back (the scan writes card ids into them).

@@ -23,6 +23,9 @@ The cards:
 - `src/lru.rs`: why an LRU cache's `get` takes `&mut self`.
 - `rust.cards.md`: a code block that doesn't compile, and a cloze card about `Option<&T>`.
 
+`tests/flaky_server.rs` retries against a simulated flaky server with real waits, so
+`cargo test` takes long enough to review a couple of cards.
+
 ## The recorded demo
 
 `demo/demo.tape` is the 60-second demo as a [VHS](https://github.com/charmbracelet/vhs)
