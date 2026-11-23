@@ -1,0 +1,34 @@
+# Render demo/demo.tape to a GIF and an MP4 with VHS, using Keepjay built from a branch
+# of keepjay-dev/keepjay (main by default, so the demo can show unreleased work).
+name: Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      keepjay_ref:
+        description: "keepjay-dev/keepjay branch or tag to build"
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install Keepjay and the kj alias
+        run: |
+          cargo install --locked --git https://github.com/keepjay-dev/keepjay \
+            --branch "${{ inputs.keepjay_ref }}" keepjay-cli
+          keepjay alias install
+          kj --version
+      - uses: charmbracelet/vhs-action@v2
+        with:
+          path: demo/demo.tape
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo
+          path: demo/out/
+          if-no-files-found: error
